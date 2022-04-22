@@ -1,0 +1,26 @@
+{
+  "name": "@wault/audio-mixer",
+  "version": "0.1.0",
+  "description": "web audio wrapper",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "tsc"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vallrand/audio-mixer.git"
+  },
+  "author": "Wilhelm Vallrand",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vallrand/audio-mixer/issues"
+  },
+  "homepage": "https://github.com/vallrand/audio-mixer#readme",
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
