@@ -75,20 +75,22 @@ export class AudioParameter<T extends AudioNode> extends Callable {
         this.ease = ease
 
         if(!this.context || !this.param) return this.value
-        const startValue = clamp(this.value, this.param.minValue, this.param.maxValue) || AudioParameter.min
-        const endValue = clamp(this.endValue, this.param.minValue, this.param.maxValue) || AudioParameter.min
+        const startValue = clamp(this.value, this.param.minValue, this.param.maxValue)
+        const endValue = clamp(this.endValue, this.param.minValue, this.param.maxValue)
 
         this.param.cancelScheduledValues(0)
-        this.param.setValueAtTime(startValue, 0)
         switch(this.endTime > this.currentTime ? ease : undefined){
             case 'linear':
+                this.param.setValueAtTime(startValue, 0)
                 this.param.linearRampToValueAtTime(endValue, this.endTime)
                 break
             case 'exponential':
-                this.param.exponentialRampToValueAtTime(endValue, this.endTime)
+                this.param.setValueAtTime(startValue || AudioParameter.min, 0)
+                this.param.exponentialRampToValueAtTime(endValue || AudioParameter.min, this.endTime)
                 break
             case 'step':
             default:
+                this.param.setValueAtTime(startValue, 0)
                 this.param.setValueAtTime(endValue, this.endTime)
         }
         return this.value
